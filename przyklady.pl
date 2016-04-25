@@ -50,3 +50,29 @@ reverseList1([], Result, Result).
 reverseList1([A|B], Acc, Result) :-
   reverseList1(B, [A|Acc], Result).
 %----------------------------------------
+
+%----------- "Quick" sort ---------------
+quickSort([A|B], Result) :-
+	partition(A, B, Left, Right),
+	quickSort(Left, LResult),
+	quickSort(Right, RResult),
+	append(LResult, [A|RResult], Result).
+	
+quickSort([], []).
+	
+% jak A >= B, to B wpisujemy do lewej listy
+partition(A, [B|C], [B|Left], Right) :-
+	A >= B, !,
+	partition(A, C, Left, Right).
+	
+% wpp, B przypisujemy do prawej
+partition(A, [B|C], Left, [B|Right]) :-
+	partition(A, C, Left, Right).
+	
+partition(_, [], [], []).
+
+append([], Result, Result).
+
+append([A|B], C, [A|Result]) :-
+	append(B, C, Result).
+%----------------------------------------
