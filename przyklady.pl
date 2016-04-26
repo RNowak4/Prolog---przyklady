@@ -76,3 +76,13 @@ append([], Result, Result).
 append([A|B], C, [A|Result]) :-
 	append(B, C, Result).
 %----------------------------------------
+
+%-------- Wszystkie permutacje ----------
+permutate([], []).
+
+permutate([A|B], P) :-
+	permutate(B, P1),
+	append(L1, L2, P1),
+	append(L1, [A], X),
+	append(X, L2, P).
+%----------------------------------------
